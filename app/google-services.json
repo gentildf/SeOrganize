@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "806057227024",
+    "project_id": "seorganize-aacc9",
+    "storage_bucket": "seorganize-aacc9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806057227024:android:0e8b9c329a04f38d932b95",
+        "android_client_info": {
+          "package_name": "com.example.seorganize"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "806057227024-7kjrqgj19req6l3vbvtgpbvst6kcshlp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.seorganize",
+            "certificate_hash": "563000d06392884614527309fe6ea56884670a42"
+          }
+        },
+        {
+          "client_id": "806057227024-cdmdtb00nmhobp49geecdcng8trimgea.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATKkjFnwaI9GRfHXzDGrtSouOKB5vauzg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "806057227024-cdmdtb00nmhobp49geecdcng8trimgea.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
