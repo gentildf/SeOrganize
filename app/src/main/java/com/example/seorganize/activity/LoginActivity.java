@@ -21,11 +21,5 @@ public class LoginActivity extends AppCompatActivity {
 
 
     }
-    public void acessarConta(){
-
-       autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
-       autenticacao.signInWithEmailAndPassword(usuario.getEmail(), usuario.getSenha());
-
-    }
 
 }

@@ -16,6 +16,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -32,19 +35,23 @@ public class CadastroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cadastro);
 
+        botaoCadastrar = findViewById(R.id.buttonCadastrar);
+
         // Instanciar itens do layout
         textNome = findViewById(R.id.textNome);
         textEmail = findViewById(R.id.textEmail);
         textSenha = findViewById(R.id.textPassword);
 
-        // Recuperar dados digitados
-        String textoNome = textNome.getText().toString();
-        String textoEmail = textEmail.getText().toString();
-        String textoSenha = textSenha.getText().toString();
+
 
         botaoCadastrar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                // Recuperar dados digitados
+                String textoNome = textNome.getText().toString();
+                String textoEmail = textEmail.getText().toString();
+                String textoSenha = textSenha.getText().toString();
+
                 if (!textoNome.isEmpty()){ // Verifica se o nome esta vazio. ! usado para pegar o inverso.
                     if(!textoEmail.isEmpty()){
                         if(!textoSenha.isEmpty()){
@@ -70,9 +77,6 @@ public class CadastroActivity extends AppCompatActivity {
                             "Preencha o nome!",
                             Toast.LENGTH_SHORT).show();
                 }
-
-
-
             }
         });
 
@@ -89,8 +93,23 @@ public class CadastroActivity extends AppCompatActivity {
                                         "Cadastro feito com sucesso!",
                                         Toast.LENGTH_SHORT).show();
                             } else {
-                                Toast.makeText(getApplicationContext(),
-                                        "Erro ao cadastrar usuario!",
+                                String excecao = "";
+
+                                try {
+                                    throw task.getException();
+                                } catch (FirebaseAuthWeakPasswordException e){
+                                    excecao = "Digite uma senha mais forte!";
+                                } catch (FirebaseAuthInvalidCredentialsException e){
+                                    excecao = "Por favor, digite um email valido.";
+                                } catch (FirebaseAuthUserCollisionException e){
+                                    excecao = "Email ja cadastrado em outra conta";
+                                } catch (Exception e){
+                                    excecao = "Erro ao cadastrar usuario: "+ e.getMessage();
+                                    e.printStackTrace();
+                                }
+
+                                Toast.makeText(CadastroActivity.this,
+                                        excecao,
                                         Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -98,9 +117,4 @@ public class CadastroActivity extends AppCompatActivity {
 
     }
 
-
-
-     public void botaoTermos(View v) {
-
-    }
 }
