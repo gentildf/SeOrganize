@@ -38,6 +38,13 @@ public class MainActivity extends IntroActivity {
                 //.canGoForward(false) // para nao ir adiante o ultimo slide
                 .build()
         );
+        addSlide(new FragmentSlide.Builder()
+                .background(android.R.color.white)
+                .fragment(R.layout.slide_5)
+                .canGoForward(false)
+                .canGoBackward(false)
+                .build()
+        );
 
 
     }
