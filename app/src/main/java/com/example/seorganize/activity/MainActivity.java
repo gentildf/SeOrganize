@@ -1,4 +1,4 @@
-package com.example.seorganize;
+package com.example.seorganize.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.example.seorganize.R;
 import com.example.seorganize.activity.CadastroActivity;
 import com.example.seorganize.activity.LoginActivity;
 import com.heinrichreimersoftware.materialintro.app.IntroActivity;
