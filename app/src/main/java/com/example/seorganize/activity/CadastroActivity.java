@@ -19,8 +19,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class CadastroActivity extends AppCompatActivity {
 
@@ -39,8 +37,8 @@ public class CadastroActivity extends AppCompatActivity {
 
         // Instanciar itens do layout
         textNome = findViewById(R.id.textNome);
-        textEmail = findViewById(R.id.textEmail);
-        textSenha = findViewById(R.id.textPassword);
+        textEmail = findViewById(R.id.loginEmail);
+        textSenha = findViewById(R.id.loginPassword);
 
 
 
@@ -55,25 +53,26 @@ public class CadastroActivity extends AppCompatActivity {
                 if (!textoNome.isEmpty()){ // Verifica se o nome esta vazio. ! usado para pegar o inverso.
                     if(!textoEmail.isEmpty()){
                         if(!textoSenha.isEmpty()){
+
                             usuario = new Usuario();
                             usuario.setNome(textoNome);
                             usuario.setEmail(textoEmail);
                             usuario.setSenha(textoSenha);
 
-
                             cadastrarUsuario();
+
                         }else{
-                            Toast.makeText(getApplicationContext(),
+                            Toast.makeText(CadastroActivity.this,
                                     "Preencha a senha!",
                                     Toast.LENGTH_SHORT).show();
                         }
                     } else{
-                        Toast.makeText(getApplicationContext(),
+                        Toast.makeText(CadastroActivity.this,
                                 "Preencha o email!",
                                 Toast.LENGTH_SHORT).show();
                     }
                 } else {
-                    Toast.makeText(getApplicationContext(),
+                    Toast.makeText(CadastroActivity.this,
                             "Preencha o nome!",
                             Toast.LENGTH_SHORT).show();
                 }
@@ -89,7 +88,7 @@ public class CadastroActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                Toast.makeText(getApplicationContext(),
+                                Toast.makeText(CadastroActivity.this,
                                         "Cadastro feito com sucesso!",
                                         Toast.LENGTH_SHORT).show();
                             } else {
