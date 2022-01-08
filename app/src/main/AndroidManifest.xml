@@ -10,6 +10,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SeOrganize">
         <activity
+            android:name=".activity.ReceitasActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activity.PrincipalActivity"
+            android:exported="false"
+            android:label="@string/title_activity_principal"
+            android:theme="@style/Theme.SeOrganize.NoActionBar" />
+        <activity
             android:name=".activity.CadastroActivity"
             android:exported="false" />
         <activity

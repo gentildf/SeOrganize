@@ -6,13 +6,17 @@
         <entry key="app/src/main/res/layout/activity_cadastro.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.33125" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_principal.xml" value="0.33125" />
         <entry key="app/src/main/res/layout/boas_vindas.xml" value="0.33125" />
+        <entry key="app/src/main/res/layout/content_principal.xml" value="0.33125" />
         <entry key="app/src/main/res/layout/slide_1.xml" value="0.33125" />
         <entry key="app/src/main/res/layout/slide_2.xml" value="0.33125" />
         <entry key="app/src/main/res/layout/slide_3.xml" value="0.33125" />
         <entry key="app/src/main/res/layout/slide_4.xml" value="0.33125" />
         <entry key="app/src/main/res/layout/slide_5.xml" value="0.33125" />
         <entry key="app/src/main/res/layout/tela_login.xml" value="0.33125" />
+        <entry key="app/src/main/res/layout/toolbar.xml" value="0.33125" />
+        <entry key="app/src/main/res/menu/main_menu.xml" value="0.33125" />
       </map>
     </option>
   </component>
