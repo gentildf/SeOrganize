@@ -10,11 +10,13 @@ public class DateCustom {
         String dataString = simpleDateFormat.format(date);
         return dataString;
     }
-    public static String mesAno(){
-        long date = System.currentTimeMillis();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMyyyy");
-        String mesAno = simpleDateFormat.format(date);
-        return mesAno;
+    public static String mesAno(String data){
+        String retornoData[] = data.split("/");
+        String mes = retornoData[1];
+        String ano = retornoData[2];
+        String meseAno = mes + ano;
+
+        return meseAno;
     }
 
 }

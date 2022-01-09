@@ -29,15 +29,17 @@ public class ReceitasActivity extends AppCompatActivity {
 
     public void salvarReceita(View view){
         movimentacao = new Movimentacao();
+        String data = binding.editData.getText().toString();
         movimentacao.setCategoria(binding.editCategoria.getText().toString());
-        movimentacao.setData(binding.editData.getText().toString());
+        movimentacao.setData(data);
         movimentacao.setDescricao(binding.editDescricao.getText().toString());
         movimentacao.setValor(Double.parseDouble(binding.inputReceita.getText().toString()));
         movimentacao.setTipo("r");
-        movimentacao.salvar();
+        movimentacao.salvar(data);
+        voltarPrincipal();
 
     }
-    public void voltarPrincipal(View view){
+    public void voltarPrincipal(){
         startActivity(new Intent(this, PrincipalActivity.class));
 
     }

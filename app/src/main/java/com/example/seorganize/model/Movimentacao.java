@@ -2,6 +2,7 @@ package com.example.seorganize.model;
 
 import com.example.seorganize.config.ConfiguracaoFirebase;
 import com.example.seorganize.helper.Base64Custom;
+import com.example.seorganize.helper.DateCustom;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 
@@ -13,11 +14,15 @@ public class Movimentacao {
     public Movimentacao() {
     }
 
-    public void salvar(){
+    public void salvar(String dataEscolhida){
         FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
         idUsuario = Base64Custom.codificarBase64(autenticacao.getCurrentUser().getEmail());
         DatabaseReference firebase = ConfiguracaoFirebase.getFirebaseDatabase();
-        firebase.child("movimentacao").child(idUsuario).child("mes-ano").push().setValue(this);
+        firebase.child("movimentacao")
+                .child(idUsuario)
+                .child(DateCustom.mesAno(dataEscolhida))
+                .push()
+                .setValue(this);
     }
 
     public String getData() {

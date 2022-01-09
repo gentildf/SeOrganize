@@ -27,15 +27,17 @@ public class DespesasActivity extends AppCompatActivity {
     }
     public void salvarDespesa(View view){
         movimentacao = new Movimentacao();
+        String data = binding.editData.getText().toString();
         movimentacao.setCategoria(binding.editCategoria.getText().toString());
-        movimentacao.setData(binding.editData.getText().toString());
+        movimentacao.setData(data);
         movimentacao.setDescricao(binding.editDescricao.getText().toString());
         movimentacao.setValor(Double.parseDouble(binding.inputDespesa.getText().toString()));
         movimentacao.setTipo("d");
-        movimentacao.salvar();
+        movimentacao.salvar(data);
+        voltarPrincipal();
 
     }
-    public void voltarPrincipal(View view){
+    public void voltarPrincipal(){
         startActivity(new Intent(this, PrincipalActivity.class));
     }
 
