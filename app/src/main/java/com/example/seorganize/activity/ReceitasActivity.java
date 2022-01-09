@@ -8,16 +8,21 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.seorganize.R;
+import com.example.seorganize.config.ConfiguracaoFirebase;
 import com.example.seorganize.databinding.ActivityPrincipalBinding;
 import com.example.seorganize.databinding.ActivityReceitasBinding;
 import com.example.seorganize.helper.DateCustom;
 import com.example.seorganize.model.Movimentacao;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 
 public class ReceitasActivity extends AppCompatActivity {
 
     private ActivityReceitasBinding binding;
     private Movimentacao movimentacao;
     private String textoValor, textoCategoria, data, textoDescricao;
+    private DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
+    private FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,9 +31,6 @@ public class ReceitasActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         binding.editData.setText(DateCustom.dataAtual());
-
-
-
 
     }
 
