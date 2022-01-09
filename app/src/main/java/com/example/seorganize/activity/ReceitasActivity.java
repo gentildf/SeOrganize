@@ -1,5 +1,6 @@
 package com.example.seorganize.activity;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -7,14 +8,17 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
-import com.example.seorganize.R;
 import com.example.seorganize.config.ConfiguracaoFirebase;
-import com.example.seorganize.databinding.ActivityPrincipalBinding;
 import com.example.seorganize.databinding.ActivityReceitasBinding;
+import com.example.seorganize.helper.Base64Custom;
 import com.example.seorganize.helper.DateCustom;
 import com.example.seorganize.model.Movimentacao;
+import com.example.seorganize.model.Usuario;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.ValueEventListener;
 
 public class ReceitasActivity extends AppCompatActivity {
 
@@ -23,6 +27,7 @@ public class ReceitasActivity extends AppCompatActivity {
     private String textoValor, textoCategoria, data, textoDescricao;
     private DatabaseReference firebaseRef = ConfiguracaoFirebase.getFirebaseDatabase();
     private FirebaseAuth autenticacao = ConfiguracaoFirebase.getFirebaseAutenticacao();
+    private Double receitaGerada, receitaTotal;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +37,21 @@ public class ReceitasActivity extends AppCompatActivity {
 
         binding.editData.setText(DateCustom.dataAtual());
 
-    }
+        recuperarReceitaTotal(); // Recuperar assim que carregar a tela.
 
+    }
     public void salvarReceita(View view){
         if (validarCamposReceita()){
             movimentacao = new Movimentacao();
             movimentacao.setCategoria(textoCategoria);
             movimentacao.setData(data);
             movimentacao.setDescricao(textoDescricao);
-            movimentacao.setValor(Double.parseDouble(textoValor));
+            receitaGerada = Double.parseDouble(textoValor);
+            Double receitaAtualizada = receitaTotal + receitaGerada;
+            movimentacao.setValor(receitaGerada);
             movimentacao.setTipo("r");
             movimentacao.salvar(data);
+            atualizarReceita(receitaAtualizada);
             voltarPrincipal();
         }
     }
@@ -94,5 +103,29 @@ public class ReceitasActivity extends AppCompatActivity {
             return false;
         }
     }
+    public void recuperarReceitaTotal(){
+        String emailUsuario = autenticacao.getCurrentUser().getEmail(); // Recupera o email
+        String idUsuario = Base64Custom.codificarBase64(emailUsuario); // Codifica o email
+        DatabaseReference usuarioRef = firebaseRef.child("usuarios").child(idUsuario);
 
+        usuarioRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Usuario usuario = snapshot.getValue(Usuario.class);
+                receitaTotal = usuario.getDespesaTotal();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+    public void atualizarReceita(Double receita){
+        String emailUsuario = autenticacao.getCurrentUser().getEmail(); // Recupera o email
+        String idUsuario = Base64Custom.codificarBase64(emailUsuario); // Codifica o email
+        DatabaseReference usuarioRef = firebaseRef.child("usuarios").child(idUsuario);
+
+        usuarioRef.child("receitaTotal").setValue(receita);
+    }
 }
