@@ -104,7 +104,7 @@
         android:layout_marginBottom="16dp"
         android:clickable="true"
         android:contentDescription="TODO"
-        android:onClick="voltarPrincipal"
+        android:onClick="salvarDespesa"
         app:backgroundTint="@color/colorPrimaryDarkDespesas"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
