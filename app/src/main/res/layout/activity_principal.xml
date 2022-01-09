@@ -68,24 +68,27 @@
 
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menu_receita"
-            android:onClick="adicionarReceita"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_baseline_add_24"
+            android:onClick="adicionarReceita"
+            android:src="@drawable/ic_baseline_add_24"
             app:fab_colorNormal="@color/colorPrimaryReceitas"
             app:fab_colorPressed="@color/colorPrimaryDarkReceitas"
             fab:fab_label="Receitas"
-            fab:fab_size="mini" />
+            fab:fab_size="mini"
+            tools:ignore="VectorDrawableCompat" />
+
         <com.github.clans.fab.FloatingActionButton
             android:id="@+id/menu_despesa"
-            android:onClick="adicionarDespesa"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_baseline_remove_24"
+            android:onClick="adicionarDespesa"
+            android:src="@drawable/ic_baseline_remove_24"
             app:fab_colorNormal="@color/colorPrimaryDespesas"
             app:fab_colorPressed="@color/colorPrimaryDarkDespesas"
+            fab:fab_label="Despesas"
             fab:fab_size="mini"
-            fab:fab_label="Despesas" />
+            tools:ignore="VectorDrawableCompat" />
 
     </com.github.clans.fab.FloatingActionMenu>
 

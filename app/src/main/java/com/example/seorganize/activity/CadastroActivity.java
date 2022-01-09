@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.example.seorganize.R;
 import com.example.seorganize.config.ConfiguracaoFirebase;
+import com.example.seorganize.helper.Base64Custom;
 import com.example.seorganize.model.Usuario;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -89,8 +90,11 @@ public class CadastroActivity extends AppCompatActivity {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
-                                finish();
+                                String idUsuario = Base64Custom.codificarBase64(usuario.getEmail());
+                                usuario.setIdUsuario(idUsuario);
+                                usuario.salvar();
 
+                                finish();
                             } else {
                                 String excecao = "";
 
@@ -106,7 +110,6 @@ public class CadastroActivity extends AppCompatActivity {
                                     excecao = "Erro ao cadastrar usuario: "+ e.getMessage();
                                     e.printStackTrace();
                                 }
-
                                 Toast.makeText(CadastroActivity.this,
                                         excecao,
                                         Toast.LENGTH_SHORT).show();
