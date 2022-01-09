@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.example.seorganize.R;
 import com.example.seorganize.databinding.ActivityPrincipalBinding;
@@ -16,6 +17,7 @@ public class ReceitasActivity extends AppCompatActivity {
 
     private ActivityReceitasBinding binding;
     private Movimentacao movimentacao;
+    private String textoValor, textoCategoria, data, textoDescricao;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,24 +27,70 @@ public class ReceitasActivity extends AppCompatActivity {
 
         binding.editData.setText(DateCustom.dataAtual());
 
+
+
+
     }
 
     public void salvarReceita(View view){
-        movimentacao = new Movimentacao();
-        String data = binding.editData.getText().toString();
-        movimentacao.setCategoria(binding.editCategoria.getText().toString());
-        movimentacao.setData(data);
-        movimentacao.setDescricao(binding.editDescricao.getText().toString());
-        movimentacao.setValor(Double.parseDouble(binding.inputReceita.getText().toString()));
-        movimentacao.setTipo("r");
-        movimentacao.salvar(data);
-        voltarPrincipal();
-
+        if (validarCamposReceita()){
+            movimentacao = new Movimentacao();
+            movimentacao.setCategoria(textoCategoria);
+            movimentacao.setData(data);
+            movimentacao.setDescricao(textoDescricao);
+            movimentacao.setValor(Double.parseDouble(textoValor));
+            movimentacao.setTipo("r");
+            movimentacao.salvar(data);
+            voltarPrincipal();
+        }
     }
     public void voltarPrincipal(){
         startActivity(new Intent(this, PrincipalActivity.class));
-
     }
 
+    public Boolean validarCamposReceita(){
+        textoValor = binding.inputReceita.getText().toString();
+        textoCategoria = binding.editCategoria.getText().toString();
+        textoDescricao = binding.editDescricao.getText().toString();
+        data = binding.editData.getText().toString();
+
+        if(!textoValor.isEmpty()){
+            if(!data.isEmpty()){
+                if(!textoCategoria.isEmpty()){
+                    if(!textoDescricao.isEmpty()){
+                        return true;
+                    } else{
+                        Toast.makeText(
+                                ReceitasActivity.this,
+                                "Preencha a descricao!",
+                                Toast.LENGTH_SHORT
+                        ).show();
+                        return false;
+                    }
+                } else{
+                    Toast.makeText(
+                            ReceitasActivity.this,
+                            "Preencha a categoria!",
+                            Toast.LENGTH_SHORT
+                    ).show();
+                    return false;
+                }
+            } else{
+                Toast.makeText(
+                        ReceitasActivity.this,
+                        "Preencha a data!",
+                        Toast.LENGTH_SHORT
+                ).show();
+                return false;
+            }
+        } else{
+            Toast.makeText(
+                    ReceitasActivity.this,
+                    "Preencha o valor!",
+                    Toast.LENGTH_SHORT
+            ).show();
+            return false;
+        }
+    }
 
 }
